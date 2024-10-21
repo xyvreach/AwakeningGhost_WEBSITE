@@ -84,10 +84,10 @@ function Header() {
         {isMobileMenuOpen && (
           <ul className="absolute top-16 left-0 w-full bg-black text-lg space-y-4 py-6 px-4 md:hidden">
             <li><Link to="/tour" className="block hover:text-red-600">Tour</Link></li>
-            <li><Link to="/news" className="block hover:text-red-600">News</Link></li>
             <li><Link to="/band" className="block hover:text-red-600">Band</Link></li>
             <li><Link to="/music" className="block hover:text-red-600">Music</Link></li>
             <li><Link to="/media" className="block hover:text-red-600">Media</Link></li>
+            <li><Link to="/news" className="block hover:text-red-600">News</Link></li>
             <li><Link to="/merch-items" className="block hover:text-red-600">Shop</Link></li>
           </ul>
         )}

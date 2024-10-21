@@ -15,8 +15,10 @@ const Body = () => {
         backgroundAttachment: 'fixed',
       }}
     >
-      {/* Replace the static content with BodyBanner */}
+      {/* Replace the static content with BodyBanner 
       <BodyBanner />
+      */}
+      
     </div>
   );
 }
