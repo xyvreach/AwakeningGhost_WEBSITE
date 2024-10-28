@@ -21,7 +21,7 @@ function Header() {
               <img
                 src={bandName}
                 alt="Awakening Ghost Name"
-                className="h-12 w-auto md:h-16 transition-transform duration-300 hover:scale-110"
+                className="h-12 w-auto md:h-16 transition-transform duration-300"
               />
             </div>
           </Link>
@@ -30,32 +30,14 @@ function Header() {
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-8 text-lg font-bold uppercase">
           <li>
-            <Link to="/tour" className="relative hover:text-red-600 transition-colors">
-              Tour
-              <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-0 h-1 bg-red-600 transition-all duration-300 hover:w-full"></span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/news" className="relative hover:text-red-600 transition-colors">
-              News
-              <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-0 h-1 bg-red-600 transition-all duration-300 hover:w-full"></span>
-            </Link>
-          </li>
-          <li>
             <Link to="/band" className="relative hover:text-red-600 transition-colors">
               Band
               <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-0 h-1 bg-red-600 transition-all duration-300 hover:w-full"></span>
             </Link>
           </li>
           <li>
-            <Link to="/music" className="relative hover:text-red-600 transition-colors">
-              Music
-              <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-0 h-1 bg-red-600 transition-all duration-300 hover:w-full"></span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/media" className="relative hover:text-red-600 transition-colors">
-              Media
+            <Link to="/news" className="relative hover:text-red-600 transition-colors">
+              News
               <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-0 h-1 bg-red-600 transition-all duration-300 hover:w-full"></span>
             </Link>
           </li>
@@ -83,10 +65,7 @@ function Header() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <ul className="absolute top-16 left-0 w-full bg-black text-lg space-y-4 py-6 px-4 md:hidden">
-            <li><Link to="/tour" className="block hover:text-red-600">Tour</Link></li>
             <li><Link to="/band" className="block hover:text-red-600">Band</Link></li>
-            <li><Link to="/music" className="block hover:text-red-600">Music</Link></li>
-            <li><Link to="/media" className="block hover:text-red-600">Media</Link></li>
             <li><Link to="/news" className="block hover:text-red-600">News</Link></li>
             <li><Link to="/merch-items" className="block hover:text-red-600">Shop</Link></li>
           </ul>

@@ -7,6 +7,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import MerchItemsCard from '../components/store/MerchItemsCard';
 import MerchItemsTable from '../components/store/MerchItemsTable';
+import Header from '../components/home/Header';
 
 const Store = () => {
     const [merchitems, setMerchItems] = useState([]);
@@ -28,16 +29,19 @@ const Store = () => {
     }, []);
 
     return (
-        <div className='p-4'>
+        <div className='p-0'>
+            <div>
+                <Header />
+            </div>
             <div className='flex justify-center items-center gap-x-4'>
 
-                <button 
+                <button
                     className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
                     onClick={() => setShowType('table')}
                 >
                     Table
                 </button>
-                <button 
+                <button
                     className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
                     onClick={() => setShowType('card')}
                 >
