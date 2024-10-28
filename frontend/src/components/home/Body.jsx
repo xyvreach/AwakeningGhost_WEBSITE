@@ -2,6 +2,8 @@ import React from 'react';
 import backgroundImage from '../../images/background_image.jpg'; // Update the path to your image
 import backgroundImage2 from '../../images/background_image2.png'; // Update the path to your image
 import backgroundImage3 from '../../images/background_image3.png'; // Update the path to your image
+import backgroundImage4 from '../../images/background_image4.jpg'; // Update the path to your image
+import backgroundImage5 from '../../images/background_image5.jpg'; // Update the path to your image
 import slideshow_image1 from '../../images/slideshow_image1.png';
 import slideshow_image2 from '../../images/slideshow_image2.png';
 import slideshow_image3 from '../../images/slideshow_image3.png';
@@ -14,7 +16,7 @@ const Body = () => {
     <div
       className="min-h-screen bg-black text-white"
       style={{
-        backgroundImage: `url(${backgroundImage3})`,
+        backgroundImage: `url(${backgroundImage5})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',

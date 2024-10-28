@@ -35,7 +35,7 @@ const Footer = () => {
         {/* Social Media Links Section */}
         <div className="flex space-x-4 mt-6 md:mt-0">
           <a
-            href="https://www.facebook.com/awakeningghost"
+            href="https://www.facebook.com/awakening.ghost"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-red-600 transition-colors"

@@ -11,8 +11,12 @@ const InstagramGrid = () => {
 
   return (
     <div className="container mx-auto py-16">
-      <h2 className="flex justify-center text-white text-2xl mb-6">Instagram</h2>
-      <div className="w-full">
+      
+      <div className="w-full bg-black bg-opacity-80 shadow-lg py-2">
+        <h2 className="text-xl font-bold text-white ml-[20%]">INSTAGRAM</h2>
+      </div>
+      
+      <div className="w-full flex justify-center bg-opacity-80 bg-black rounded-lg shadow-lg">
         {/* Elfsight widget div */}
         <div className="elfsight-app-ab36afb5-90b3-4e59-9c7c-ce69324ed32d" data-elfsight-app-lazy></div>
       </div>
