@@ -9,18 +9,17 @@ const BodyBanner = ({
   transitionDuration = 1000, // in milliseconds
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const slideInterval = useRef(null);
 
   const totalSlides = slides.length;
 
   // Automatically cycle through images
   useEffect(() => {
-    if (autoCycle && !isPaused) {
+    if (autoCycle) {
       startSlideTimer();
     }
     return () => stopSlideTimer();
-  }, [currentImageIndex, isPaused, autoCycle]);
+  }, [currentImageIndex, autoCycle]);
 
   const startSlideTimer = () => {
     stopSlideTimer();
@@ -63,29 +62,47 @@ const BodyBanner = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Calculate the style for each slide
+  const getSlideStyle = (index) => {
+    let offset = index - currentImageIndex;
+    if (offset < -1) {
+      offset += totalSlides;
+    } else if (offset > 1) {
+      offset -= totalSlides;
+    }
+
+    if (Math.abs(offset) > 1) {
+      return {
+        display: 'none',
+      };
+    }
+
+    const transformValue = `translateX(${offset * 100}%)`;
+    const opacityValue = offset === 0 ? 1 : 0;
+
+    return {
+      transform: transformValue,
+      opacity: opacityValue,
+      transition: `transform ${transitionDuration}ms ease-in-out, opacity ${transitionDuration}ms ease-in-out`,
+    };
+  };
+
   return (
-    <div
-      className="relative h-96 w-full bg-black overflow-hidden"
-      onMouseEnter={() => pauseOnHover && setIsPaused(true)}
-      onMouseLeave={() => pauseOnHover && setIsPaused(false)}
-    >
+    <div className="relative w-full h-[100vh] sm:h-[100vh] bg-black overflow-hidden group">
       {/* Slide Images */}
       {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-${transitionDuration} ease-in-out ${
-            index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
+        <div key={index} className="absolute inset-0" style={getSlideStyle(index)}>
           <img
             src={slide.image}
             alt={slide.alt || `Slide ${index + 1}`}
             className="w-full h-full object-cover"
           />
+          {/* Black Shadow Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-transparent"></div>
           {/* Overlay Text */}
           {slide.caption && (
-            <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 z-10">
-              <h2 className="text-white text-3xl font-bold">{slide.caption}</h2>
+            <div className="absolute inset-0 flex flex-col justify-end items-start p-8 z-10">
+              <h2 className="text-white text-4xl font-semibold">{slide.caption}</h2>
             </div>
           )}
         </div>
@@ -93,18 +110,18 @@ const BodyBanner = ({
 
       {/* Navigation Arrows */}
       <button
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 focus:outline-none z-20"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none z-20 hover:text-gray-300"
         onClick={goToPreviousImage}
         aria-label="Previous Slide"
       >
-        <FaArrowLeft size={24} />
+        <FaArrowLeft size={30} />
       </button>
       <button
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 focus:outline-none z-20"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none z-20 hover:text-gray-300"
         onClick={goToNextImage}
         aria-label="Next Slide"
       >
-        <FaArrowRight size={24} />
+        <FaArrowRight size={30} />
       </button>
 
       {/* Indicators */}
@@ -113,8 +130,8 @@ const BodyBanner = ({
           <button
             key={index}
             onClick={() => setCurrentImageIndex(index)}
-            className={`w-4 h-4 rounded-full ${
-              currentImageIndex === index ? 'bg-white' : 'bg-gray-500'
+            className={`w-3 h-3 rounded-full ${
+              currentImageIndex === index ? 'bg-white' : 'bg-gray-300'
             } focus:outline-none`}
             aria-label={`Go to slide ${index + 1}`}
           />

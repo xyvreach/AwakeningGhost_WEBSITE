@@ -1,40 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  FaBars,
-  FaTimes,
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-} from 'react-icons/fa';
+import { FaBars, FaTimes, FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import agLogoImage from '../../images/ag_logo_image2.jpg';
-import bandNameImage from '../../images/bandName_transparent2.png';
-import combinedLogo from '../../images/combined_awakening_ghost_logo.png'
-
-const NavLink = ({ to, children, ...props }) => (
-  <Link
-    to={to}
-    className="relative group focus:outline-none transition-colors duration-300 text-white"
-    {...props}
-  >
-    <span className="relative">
-      {children}
-      <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-primary transition-all duration-500 group-hover:w-full"></span>
-    </span>
-  </Link>
-);
-
-const SocialIcon = ({ href, label, IconComponent }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-white hover:text-primary transition-transform duration-300 transform hover:scale-110"
-    aria-label={label}
-  >
-    <IconComponent size={18} />
-  </a>
-);
+import agNameLogoImage from '../../images/bandName_transparent2.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,11 +11,6 @@ const Header = () => {
   // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  // Close mobile menu
-  const closeMenu = () => {
-    setIsMenuOpen(false);
   };
 
   // Handle scroll effect
@@ -61,128 +24,144 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-500 ${
-        isScrolled ? 'bg-black bg-opacity-50 shadow-lg' : 'bg-black bg-opacity-0'
-      }`}
+      className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-black bg-opacity-45 shadow-lg' : 'bg-transparent'
+        } backdrop-blur-lg backdrop-filter`}
+      style={{
+        backdropFilter: isScrolled ? 'blur(5px)' : 'blur(0px)',
+        WebkitBackdropFilter: isScrolled ? 'blur(10px)' : 'blur(0px)',
+      }}
     >
       <nav
         className="container mx-auto px-4 sm:px-6 lg:px-8 h-20 relative flex items-center justify-between"
         role="navigation"
         aria-label="Main Navigation"
       >
-        {/* Left: Navigation Links */}
-        <div className="flex items-center flex-1">
-          <ul className="hidden lg:flex space-x-8 text-base font-semibold uppercase text-white">
-            <li>
-              <NavLink to="/band">Band</NavLink>
-            </li>
-            <li>
-              <NavLink to="/news">News</NavLink>
-            </li>
-            <li>
-              <NavLink to="/merch-items">Shop</NavLink>
-            </li>
-          </ul>
-        </div>
+        {/* Centered Logo with Fade Effect */}
+        <div className="absolute left-1/2 transform -translate-x-1/2">
+          <Link to="/" className="flex items-center relative">
 
-        {/* Center: Logo Images */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-          <Link to="/" className="flex flex-col items-center">
-          <img
-              src={bandNameImage}
-              alt="Awakening Ghost"
-              className="h-8 w-auto md:h-10 transition-transform duration-300 transform hover:scale-110 mt-2"
+            <img
+              src={agNameLogoImage}
+              alt="Awakening Ghost Logo Large"
+              className={`transition-opacity duration-500 ${isScrolled ? 'opacity-0' : 'opacity-100'
+                } absolute`}
+              style={{ transform: 'scale(3.0)', transitionProperty: 'opacity'}}
             />
+
+
             <img
               src={agLogoImage}
-              alt="Awakening Ghost Logo"
-              className="h-8 w-auto md:h-10 transition-transform duration-300 transform hover:scale-110"
+              alt="Awakening Ghost Logo Small"
+              className={`h-14 w-auto transition-opacity duration-500 ${isScrolled ? 'opacity-100' : 'opacity-0'
+                }`}
+              style={{ transitionProperty: 'opacity' }}
             />
-            
           </Link>
         </div>
 
-        {/* Right: Social Media Icons and Mobile Menu Button */}
-        <div className="flex items-center flex-1 justify-end">
-          {/* Social Media Icons (Desktop) */}
-          <div className="hidden lg:flex space-x-4">
-            <SocialIcon
-              href="https://www.facebook.com/awakeningghost"
-              label="Facebook"
-              IconComponent={FaFacebookF}
-            />
-            <SocialIcon
-              href="https://www.twitter.com/awakeningghost"
-              label="Twitter"
-              IconComponent={FaTwitter}
-            />
-            <SocialIcon
-              href="https://www.instagram.com/awakeningghost"
-              label="Instagram"
-              IconComponent={FaInstagram}
-            />
-          </div>
-
-          {/* Mobile Menu Button */}
+        {/* Mobile Menu Button */}
+        <div className="lg:hidden text-white">
           <button
             onClick={toggleMenu}
-            className="lg:hidden text-white hover:text-primary focus:outline-none ml-4"
+            className="focus:outline-none"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
           >
-            <FaBars size={24} />
+            <FaBars size={28} />
           </button>
+        </div>
+
+        {/* Desktop Social Media Icons */}
+        <div className="hidden lg:flex items-center space-x-6 text-white">
+          <a
+            href="https://www.facebook.com/awakeningghost"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red-600 transition-transform transform hover:scale-110"
+            aria-label="Facebook"
+          >
+            <FaFacebookF size={20} />
+          </a>
+          <a
+            href="https://www.twitter.com/awakeningghost"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red-600 transition-transform transform hover:scale-110"
+            aria-label="Twitter"
+          >
+            <FaTwitter size={20} />
+          </a>
+          <a
+            href="https://www.instagram.com/awakeningghost"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red-600 transition-transform transform hover:scale-110"
+            aria-label="Instagram"
+          >
+            <FaInstagram size={20} />
+          </a>
         </div>
       </nav>
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed inset-0 bg-black bg-opacity-95 transform ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        } transition-transform duration-300 ease-in-out z-40`}
+        className={`lg:hidden fixed inset-0 bg-black h-screen bg-opacity-95 transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          } transition-transform duration-300 ease-in-out z-40 flex items-center justify-center`}
         id="mobile-menu"
         role="dialog"
         aria-modal="true"
       >
         {/* Close Button */}
         <button
-          onClick={closeMenu}
-          className="absolute top-4 right-4 text-white hover:text-primary focus:outline-none"
+          onClick={toggleMenu}
+          className="absolute top-6 right-6 text-white hover:text-red-600 focus:outline-none"
           aria-label="Close menu"
         >
-          <FaTimes size={28} />
+          <FaTimes size={32} />
         </button>
 
         {/* Mobile Menu Content */}
-        <div className="flex flex-col items-center justify-center h-full space-y-8 text-2xl uppercase text-white">
-          <NavLink to="/band" onClick={closeMenu}>
+        <div className="flex flex-col items-center justify-center w-full h-full space-y-10 text-2xl uppercase text-white px-6">
+          <Link to="/band" onClick={toggleMenu} className="hover:text-red-600 transition-colors">
             Band
-          </NavLink>
-          <NavLink to="/news" onClick={closeMenu}>
+          </Link>
+          <Link to="/news" onClick={toggleMenu} className="hover:text-red-600 transition-colors">
             News
-          </NavLink>
-          <NavLink to="/merch-items" onClick={closeMenu}>
+          </Link>
+          <Link to="/merch-items" onClick={toggleMenu} className="hover:text-red-600 transition-colors">
             Shop
-          </NavLink>
+          </Link>
 
           {/* Social Media Icons (Mobile) */}
-          <div className="flex space-x-6 mt-8">
-            <SocialIcon
+          <div className="flex space-x-8 mt-12">
+            <a
               href="https://www.facebook.com/awakeningghost"
-              label="Facebook"
-              IconComponent={FaFacebookF}
-            />
-            <SocialIcon
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-red-600 transition-transform transform hover:scale-110"
+              aria-label="Facebook"
+            >
+              <FaFacebookF size={28} />
+            </a>
+            <a
               href="https://www.twitter.com/awakeningghost"
-              label="Twitter"
-              IconComponent={FaTwitter}
-            />
-            <SocialIcon
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-red-600 transition-transform transform hover:scale-110"
+              aria-label="Twitter"
+            >
+              <FaTwitter size={28} />
+            </a>
+            <a
               href="https://www.instagram.com/awakeningghost"
-              label="Instagram"
-              IconComponent={FaInstagram}
-            />
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-red-600 transition-transform transform hover:scale-110"
+              aria-label="Instagram"
+            >
+              <FaInstagram size={28} />
+            </a>
           </div>
         </div>
       </div>

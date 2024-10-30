@@ -22,7 +22,7 @@ const InstagramGrid = () => {
         </a>
       </div>
       
-      <div className="w-full flex justify-center bg-opacity-80 bg-black rounded-lg shadow-lg">
+      <div className="w-full flex justify-center bg-opacity-80 bg-black  shadow-lg">
         <div className="elfsight-app-ab36afb5-90b3-4e59-9c7c-ce69324ed32d" data-elfsight-app-lazy></div>
       </div>
     </div>
