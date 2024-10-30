@@ -1,40 +1,6 @@
 import React from 'react';
 
-// Example data for shows
-const shows = [
-  {
-    date: 'December 13, 2024',
-    location: 'Los Angeles, California, United States',
-    venue: 'YouTube Theater',
-    additionalInfo: 'AWMH Helping Hands Concert & Auction',
-    actions: ['Sold Out'],
-    imageUrl: '/images/los-angeles.jpg', // Example image URL
-  },
-  {
-    date: 'April 12, 2025',
-    location: 'Las Vegas, Nevada, United States',
-    venue: 'Las Vegas Festival Grounds',
-    additionalInfo: 'Sick New World',
-    actions: ['Buy Tickets', 'About the Festival', 'More Info'],
-    imageUrl: '/images/las-vegas.jpg', // Example image URL
-  },
-  {
-    date: 'April 19, 2025',
-    location: 'Syracuse, New York, United States',
-    venue: 'JMA Wireless Dome',
-    actions: ['Buy Tickets', 'Buy an Enhanced Experience', 'Buy a Travel Package', 'More Info'],
-    imageUrl: '/images/syracuse.jpg', // Example image URL
-  },
-  {
-    date: 'April 24, 2025',
-    location: 'Toronto, Ontario, Canada',
-    venue: 'Rogers Centre',
-    actions: ['Buy Tickets', 'Buy an Enhanced Experience', 'Buy a Travel Package', 'More Info'],
-    imageUrl: '/images/toronto.jpg', // Example image URL
-  },
-];
-
-const UpcomingShow = () => {
+const UpcomingShow = ({ shows }) => {
   return (
     <section className="bg-white py-16">
       <div className="container mx-auto px-6 lg:px-12">
@@ -65,7 +31,7 @@ const UpcomingShow = () => {
                   />
                 </div>
               )}
-              
+
               {/* Show Information */}
               <div className="p-6 flex flex-col justify-between flex-grow">
                 <div>
@@ -82,7 +48,7 @@ const UpcomingShow = () => {
                       key={actionIndex}
                       href="#"
                       className={`block text-sm uppercase tracking-wide font-semibold ${
-                        action.toLowerCase() === 'sold out'
+                        action.toLowerCase() === ('sold out')
                           ? 'text-gray-400 cursor-not-allowed'
                           : 'text-white hover:text-red-600'
                       }`}
