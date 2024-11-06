@@ -13,11 +13,14 @@ import {
   FaYoutube,
 } from 'react-icons/fa';
 import bandName_image from '../../images/bandName_image.jpg'; // Update the path to your image
+import AG_Video from './AG_Video';
 
 const Footer = () => {
   return (
     <footer className="bg-black text-white py-16">
       <div className="container mx-auto flex flex-col items-center space-y-10">
+        <AG_Video/>
+
         {/* Logo Section */}
         <div>
           <img
@@ -74,57 +77,12 @@ const Footer = () => {
           >
             <FaYoutube />
           </a>
-          <a
-            href="https://www.spotify.com/awakeningghost"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red-600 transition-colors transform hover:scale-110"
-            aria-label="Spotify"
-          >
-            <FaSpotify />
-          </a>
-          <a
-            href="https://www.apple.com/awakeningghost"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red-600 transition-colors transform hover:scale-110"
-            aria-label="Apple Music"
-          >
-            <FaApple />
-          </a>
-          <a
-            href="https://www.soundcloud.com/awakeningghost"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red-600 transition-colors transform hover:scale-110"
-            aria-label="SoundCloud"
-          >
-            <FaSoundcloud />
-          </a>
-          <a
-            href="https://www.discord.com/awakeningghost"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red-600 transition-colors transform hover:scale-110"
-            aria-label="Discord"
-          >
-            <FaDiscord />
-          </a>
-          <a
-            href="https://www.twitch.tv/awakeningghost"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-red-600 transition-colors transform hover:scale-110"
-            aria-label="Twitch"
-          >
-            <FaTwitch />
-          </a>
         </div>
 
         {/* Subscribe to Newsletter Button */}
         <div>
           <button className="px-6 py-3 border border-white rounded-full hover:bg-white hover:text-black transition-colors duration-300">
-            Subscribe to the Newsletter
+            Booking Information
           </button>
         </div>
 
