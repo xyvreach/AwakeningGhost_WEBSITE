@@ -30,7 +30,7 @@ const DeleteMerchItem = () => {
 
   return (
     <div className='p-4'>
-      <BackButton destination={`/merch-items/${id}`} />
+      <BackButton destination={`/merch-items/`} />
       <h1 className='text-3xl my-4'>Delete Merch Item</h1>
       {loading && <Spinner />}
       <div className='flex flex-col items-center border-2 border-sky-400 rounded-xl w-[600px] p-8 mx-auto'>
