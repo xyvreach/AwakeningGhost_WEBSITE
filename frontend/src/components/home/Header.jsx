@@ -45,9 +45,22 @@ const Header = () => {
         role="navigation"
         aria-label="Main Navigation"
       >
+        {/* Desktop Navigation Links */}
+        <div className="hidden lg:flex items-center space-x-8 text-white">
+          <Link to="/band" className="hover:text-red-600 transition-colors">
+            Band
+          </Link>
+          <Link to="/news" className="hover:text-red-600 transition-colors">
+            News
+          </Link>
+          <Link to="/merch-items" className="hover:text-red-600 transition-colors">
+            Shop
+          </Link>
+        </div>
+
         {/* Centered Logo with Fade Effect */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <Link to="/" className="flex items-center relative ">
+          <Link to="/" className="flex items-center relative">
             <img
               src={agNameLogoImage}
               alt="Awakening Ghost Logo Large"
@@ -56,7 +69,6 @@ const Header = () => {
               } absolute`}
               style={{ transform: 'scale(3.0)', transitionProperty: 'opacity' }}
             />
-
             <img
               src={agLogoImage}
               alt="Awakening Ghost Logo Small"
@@ -81,7 +93,7 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Desktop Social Media Icons */}
+        {/* Desktop Social Media Icons (Right Aligned) */}
         <div className="hidden lg:flex items-center space-x-6 text-white">
           <a
             href="https://www.facebook.com/awakening.ghost"

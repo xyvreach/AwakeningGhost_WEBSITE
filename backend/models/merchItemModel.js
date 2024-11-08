@@ -87,20 +87,10 @@ const merchItemSchema = mongoose.Schema(
         type: String,
       }
     }],
-    /*
-    created_at: {
-      type: Date,
-      default: Date.now,
-    },
-    updated_at: {
-      type: Date,
-      default: Date.now,
-    }
-    */
   },
   {
     timestamps: true,
   }
 );
 
-export const MerchItem = mongoose.model('Dog', merchItemSchema);
+export const MerchItem = mongoose.model('Merch', merchItemSchema);
