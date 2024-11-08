@@ -5,8 +5,10 @@ import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 
 const ShowMerchItem = () => {
-  const [merchItem, setMerchItem] = useState({});
+  const [merchItem, setMerchItem] = useState({ sizes: [] }); // Initialized sizes as an empty array
   const [loading, setLoading] = useState(false);
+  const [selectedSize, setSelectedSize] = useState('');
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
 
   useEffect(() => {
@@ -18,10 +20,27 @@ const ShowMerchItem = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        console.error('Error fetching merch item:', error);
         setLoading(false);
       });
   }, [id]);
+
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+    setQuantity(1); // Reset quantity when size changes
+  };
+
+  const handleQuantityChange = (action) => {
+    const maxQuantity =
+      merchItem.sizes?.find((s) => s.size === selectedSize)?.stock_quantity || 0;
+    if (action === 'increment' && quantity < maxQuantity) {
+      setQuantity(quantity + 1);
+    } else if (action === 'decrement' && quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const availableSizes = merchItem.sizes?.filter((sizeObj) => sizeObj.stock_quantity > 0) || [];
 
   return (
     <div className="show-merch-item-page bg-gray-100 min-h-screen p-6">
@@ -48,53 +67,98 @@ const ShowMerchItem = () => {
 
             {/* Product Details */}
             <div className="w-full md:w-1/2">
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">{merchItem.title}</h1>
-              <p className="text-lg text-gray-600 mb-4">We love a dark and mysterious tonal.</p>
-              <p className="text-2xl font-semibold text-gray-800 mb-4">${merchItem.price}</p>
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">
+                {merchItem.title}
+              </h1>
+              <p className="text-lg text-gray-600 mb-4">{merchItem.description}</p>
+              <p className="text-2xl font-semibold text-gray-800 mb-4">
+                ${merchItem.price}
+              </p>
 
               {/* Size Options */}
               <p className="text-sm font-semibold text-gray-700 mb-2">Size</p>
               <div className="grid grid-cols-3 gap-2 mb-4">
-                {["S", "M", "L", "XL", "2XL", "3XL"].map((size) => (
-                  <button
-                    key={size}
-                    className="border border-gray-400 rounded-lg py-2 text-sm text-gray-600 hover:bg-gray-100 transition"
-                  >
-                    {size}
-                  </button>
-                ))}
+                {availableSizes.length > 0 ? (
+                  availableSizes.map((sizeObj) => (
+                    <button
+                      key={sizeObj.size}
+                      className={`border border-gray-400 rounded-lg py-2 text-sm ${
+                        selectedSize === sizeObj.size
+                          ? 'bg-gray-200'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      } transition`}
+                      onClick={() => handleSizeSelect(sizeObj.size)}
+                    >
+                      {sizeObj.size}
+                    </button>
+                  ))
+                ) : (
+                  <p className="text-sm text-gray-600">Out of stock</p>
+                )}
               </div>
 
               {/* Availability */}
-              <p className="text-sm font-semibold text-gray-700 mb-2">Availability</p>
-              <p className="text-sm text-gray-600 mb-4">Select Styles for Availability</p>
+              {selectedSize && (
+                <>
+                  <p className="text-sm font-semibold text-gray-700 mb-2">
+                    Availability
+                  </p>
+                  <p className="text-sm text-gray-600 mb-4">
+                    In stock (
+                    {
+                      merchItem.sizes?.find((s) => s.size === selectedSize)
+                        ?.stock_quantity || 0
+                    }{' '}
+                    available)
+                  </p>
+                </>
+              )}
 
               {/* Quantity Selector and Add to Cart Button */}
               <div className="flex items-center space-x-4 mb-4">
                 <div className="flex items-center border border-gray-400 rounded-lg">
-                  <button className="px-3 py-1 text-gray-600">-</button>
-                  <span className="px-4 py-1 text-gray-800">1</span>
-                  <button className="px-3 py-1 text-gray-600">+</button>
+                  <button
+                    className="px-3 py-1 text-gray-600"
+                    onClick={() => handleQuantityChange('decrement')}
+                    disabled={quantity <= 1}
+                  >
+                    -
+                  </button>
+                  <span className="px-4 py-1 text-gray-800">{quantity}</span>
+                  <button
+                    className="px-3 py-1 text-gray-600"
+                    onClick={() => handleQuantityChange('increment')}
+                    disabled={
+                      quantity >=
+                      (merchItem.sizes?.find((s) => s.size === selectedSize)
+                        ?.stock_quantity || 0)
+                    }
+                  >
+                    +
+                  </button>
                 </div>
-                <button className="w-full py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed">
+                <button
+                  className={`w-full py-2 ${
+                    selectedSize
+                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  } rounded-lg transition`}
+                  disabled={!selectedSize}
+                  onClick={() => {
+                    // Add to Cart logic here
+                  }}
+                >
                   Add to Cart
                 </button>
               </div>
 
               {/* Description Section */}
               <div className="border-t border-gray-300 mt-6 pt-4">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">Description</h3>
-                <ul className="list-disc list-inside text-gray-600 mb-4">
-                  <li>100% Cotton</li>
-                  <li>Preshrunk</li>
-                  <li>Special soft wash</li>
-                </ul>
-                <p className="text-gray-600 text-sm">
-                  Wash Instructions: Machine wash cold with like colors, tumble dry low, do not bleach, do not iron graphic.
-                </p>
-                <p className="text-gray-500 text-xs mt-4">
-                  NOTE: Size charts are for general reference. Sizing may vary by brand.
-                </p>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                  Description
+                </h3>
+                <p className="text-gray-600">{merchItem.description}</p>
+                {/* Additional details can be added here */}
               </div>
             </div>
           </div>

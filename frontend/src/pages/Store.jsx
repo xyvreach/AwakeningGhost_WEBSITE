@@ -32,7 +32,7 @@ const Store = () => {
             <div className="container mx-auto px-6 pt-20"> {/* Added pt-20 to create space below header */}
                 <div className='flex justify-between items-center my-6'>
                     <h1 className='text-4xl font-bold text-gray-800'>Our Merchandise</h1>
-                    <Link to='/merchitems/create' className='flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all'>
+                    <Link to='/merch-items/create' className='flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all'>
                         <MdOutlineAddBox className='mr-2 text-2xl' />
                         Add New Item
                     </Link>
